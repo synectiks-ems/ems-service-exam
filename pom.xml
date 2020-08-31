@@ -115,14 +115,14 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.2</version>
         </dependency>
-        
+
 		<dependency>
 			<groupId>io.github.jhipster</groupId>
 			<artifactId>jhipster-framework</artifactId>
 		</dependency>
 
 		<!-- WebSocket dependencies -->
-		
+
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
@@ -759,7 +759,7 @@
 				<configuration>
 					<mainClass>${start-class}</mainClass>
 					<executable>true</executable>
-                    <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
+<!--                    <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>-->
 
                     <fork>true</fork>
 					<!-- Enable the line below to have remote debugging of your application
@@ -1093,7 +1093,7 @@
 							<mainClass>${start-class}</mainClass>
 							<executable>true</executable>
 							<fork>true</fork>
-                            <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
+<!--                            <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>-->
 							<addResources>true</addResources>
 							<!-- Enable the line below to have remote debugging of your application
 								on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> -->
