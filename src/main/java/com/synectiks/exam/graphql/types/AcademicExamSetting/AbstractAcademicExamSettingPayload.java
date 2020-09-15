@@ -1,15 +1,16 @@
 package com.synectiks.exam.graphql.types.AcademicExamSetting;
 
 import com.synectiks.exam.domain.AcademicExamSetting;
+import com.synectiks.exam.domain.vo.CmsAcademicExamSettingVo;
 
 public class AbstractAcademicExamSettingPayload {
-    private final AcademicExamSetting academicExamSetting;
+    private final CmsAcademicExamSettingVo cmsAcademicExamSettingVo;
 
-    public AbstractAcademicExamSettingPayload(AcademicExamSetting academicExamSetting) {
-        this.academicExamSetting = academicExamSetting;
+    public AbstractAcademicExamSettingPayload(CmsAcademicExamSettingVo cmsAcademicExamSettingVo) {
+        this.cmsAcademicExamSettingVo = cmsAcademicExamSettingVo;
     }
 
-    public AcademicExamSetting getAcademicExamSetting() {
-        return academicExamSetting;
+    public CmsAcademicExamSettingVo getCmsAcademicExamSettingVo() {
+        return cmsAcademicExamSettingVo;
     }
 }

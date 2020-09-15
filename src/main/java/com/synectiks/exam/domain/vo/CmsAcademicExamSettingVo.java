@@ -30,6 +30,8 @@ public class CmsAcademicExamSettingVo implements Serializable {
     private Long groupValue;
     private Long countValue;
     private Long departmentId;
+    private Long typeOfGradingId;
+    private TypeOfGrading typeOfGrading;
     private Long batchId;
     private Long sectionId;
     private Long branchId;
@@ -260,6 +262,22 @@ public class CmsAcademicExamSettingVo implements Serializable {
 
     public void setBranch(Branch branch) {
         this.branch = branch;
+    }
+
+    public Long getTypeOfGradingId() {
+        return typeOfGradingId;
+    }
+
+    public void setTypeOfGradingId(Long typeOfGradingId) {
+        this.typeOfGradingId = typeOfGradingId;
+    }
+
+    public TypeOfGrading getTypeOfGrading() {
+        return typeOfGrading;
+    }
+
+    public void setTypeOfGrading(TypeOfGrading typeOfGrading) {
+        this.typeOfGrading = typeOfGrading;
     }
 
     @Override

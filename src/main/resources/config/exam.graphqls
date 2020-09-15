@@ -113,7 +113,7 @@ input AddAcademicExamSettingInput{
 }
 
 type AddAcademicExamSettingPayload {
-    academicExamSetting: AcademicExamSetting
+    cmsAcademicExamSettingVo: CmsAcademicExamSettingVo
 }
 input UpdateAcademicExamSettingInput {
     id: Long
@@ -121,6 +121,7 @@ input UpdateAcademicExamSettingInput {
     semester: String
     examDate: Date
     startTime: String
+    strexamDate: String
     endTime: String
     gradeType: String
     total: Int
@@ -137,7 +138,7 @@ input UpdateAcademicExamSettingInput {
 }
 
 type UpdateAcademicExamSettingPayload {
-    academicExamSetting: AcademicExamSetting
+    cmsAcademicExamSettingVo: CmsAcademicExamSettingVo
 }
 input RemoveAcademicExamSettingInput {
    academicExamSettingId: Long
@@ -274,6 +275,8 @@ input UpdateCompetitiveExamInput {
   branchId: Long
   academicyearId: Long
   subjectId: Long
+  typeOfGradingId: Long
+  typeOfGrading: TypeOfGrading
   academicyear: AcademicYear
   subject: Subject
   branch: Branch

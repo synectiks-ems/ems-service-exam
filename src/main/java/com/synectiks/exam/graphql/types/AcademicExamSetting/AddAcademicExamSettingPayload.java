@@ -1,9 +1,9 @@
 package com.synectiks.exam.graphql.types.AcademicExamSetting;
 
-import com.synectiks.exam.domain.AcademicExamSetting;
+import com.synectiks.exam.domain.vo.CmsAcademicExamSettingVo;
 
 public class AddAcademicExamSettingPayload extends AbstractAcademicExamSettingPayload{
-    public AddAcademicExamSettingPayload(AcademicExamSetting academicExamSetting) {
-        super(academicExamSetting);
+    public AddAcademicExamSettingPayload(CmsAcademicExamSettingVo cmsAcademicExamSettingVo) {
+        super(cmsAcademicExamSettingVo);
     }
 }

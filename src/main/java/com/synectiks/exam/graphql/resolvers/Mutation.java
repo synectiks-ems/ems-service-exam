@@ -4,6 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.google.common.collect.Lists;
 import com.synectiks.exam.business.service.CommonService;
 import com.synectiks.exam.config.ApplicationProperties;
+import com.synectiks.exam.constant.CmsConstants;
 import com.synectiks.exam.domain.*;
 import com.synectiks.exam.domain.vo.CmsAcademicExamSettingVo;
 import com.synectiks.exam.filter.exam.ExamFilterProcessor;
@@ -62,7 +63,8 @@ public class Mutation implements GraphQLMutationResolver {
     private EntityManager entityManager;
 
     public AddAcademicExamSettingPayload addAcademicExamSetting(List<AddAcademicExamSettingInput> list) {
-        AcademicExamSetting academicExamSetting = null;
+        CmsAcademicExamSettingVo vo = null;
+        AcademicExamSetting academicExamSetting = new AcademicExamSetting();
         int countvalue = getCountvalueId()+1;
         for(AddAcademicExamSettingInput input: list ) {
 
@@ -88,7 +90,7 @@ public class Mutation implements GraphQLMutationResolver {
             this.academicExamSettingRepository.save(academicExamSetting);
 
         }
-        return  new AddAcademicExamSettingPayload(academicExamSetting);
+        return  new AddAcademicExamSettingPayload(vo);
     }
     private int getCountvalueId(){
         String sql = "select max(countvalue) from academic_exam_setting";
@@ -101,7 +103,8 @@ public class Mutation implements GraphQLMutationResolver {
     }
 
     public UpdateAcademicExamSettingPayload updateAcademicExamSetting(UpdateAcademicExamSettingInput updateAcademicExamSettingInput) {
-        AcademicExamSetting academicExamSetting = academicExamSettingRepository.findById(updateAcademicExamSettingInput.getId()).get();
+        CmsAcademicExamSettingVo vo = null;
+        AcademicExamSetting academicExamSetting = null;
         if("GRADE".equalsIgnoreCase(updateAcademicExamSettingInput.getGradeType().toString())) {
             Optional<TypeOfGrading> otg = typeOfGradingRepository.findById((updateAcademicExamSettingInput.getTypeOfGradingId()));
             if(otg.isPresent()) {
@@ -163,9 +166,10 @@ public class Mutation implements GraphQLMutationResolver {
 //            academicExamSetting.setCountvalue(updateAcademicExamSettingInput.getCountvalue());
 //        }
 
-        academicExamSettingRepository.save(academicExamSetting);
-
-        return new UpdateAcademicExamSettingPayload(academicExamSetting);
+        academicExamSetting = this.academicExamSettingRepository.save(academicExamSetting);
+        vo = CommonUtil.createCopyProperties(academicExamSetting, CmsAcademicExamSettingVo.class);
+        vo.setStrexamDate(academicExamSetting.getExamDate() != null ? DateFormatUtil.changeLocalDateFormat(academicExamSetting.getExamDate(), CmsConstants.DATE_FORMAT_dd_MM_yyyy) : "");
+        return new UpdateAcademicExamSettingPayload(vo);
     }
 
     public RemoveAcademicExamSettingPayload removeAcademicExamSetting(RemoveAcademicExamSettingInput removeAcademicExamSettingsInput) {
