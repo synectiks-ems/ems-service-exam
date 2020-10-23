@@ -105,6 +105,7 @@ public class Mutation implements GraphQLMutationResolver {
     public UpdateAcademicExamSettingPayload updateAcademicExamSetting(UpdateAcademicExamSettingInput updateAcademicExamSettingInput) {
         CmsAcademicExamSettingVo vo = null;
         AcademicExamSetting academicExamSetting = null;
+        academicExamSetting = CommonUtil.createCopyProperties(updateAcademicExamSettingInput, AcademicExamSetting.class);
         if("GRADE".equalsIgnoreCase(updateAcademicExamSettingInput.getGradeType().toString())) {
             Optional<TypeOfGrading> otg = typeOfGradingRepository.findById((updateAcademicExamSettingInput.getTypeOfGradingId()));
             if(otg.isPresent()) {
@@ -112,33 +113,11 @@ public class Mutation implements GraphQLMutationResolver {
             }
         }
 
-        if (updateAcademicExamSettingInput.getExamName() != null) {
-            academicExamSetting.setExamName(updateAcademicExamSettingInput.getExamName());
-        }
-        if (updateAcademicExamSettingInput.getSemester() != null) {
-            academicExamSetting.setSemester(updateAcademicExamSettingInput.getSemester());
-        }
+        LocalDate exmDt =  DateFormatUtil.convertLocalDateFromUtilDate(updateAcademicExamSettingInput.getExamDate());
         if (updateAcademicExamSettingInput.getExamDate() != null) {
             academicExamSetting.setExamDate(DateFormatUtil.convertLocalDateFromUtilDate(updateAcademicExamSettingInput.getExamDate()));
         }
-        if (updateAcademicExamSettingInput.getStartTime() != null) {
-            academicExamSetting.setStartTime(updateAcademicExamSettingInput.getStartTime());
-        }
-        if (updateAcademicExamSettingInput.getEndTime() != null) {
-            academicExamSetting.setEndTime(updateAcademicExamSettingInput.getEndTime());
-        }
-        if (updateAcademicExamSettingInput.getGradeType() != null) {
-            academicExamSetting.setGradeType(updateAcademicExamSettingInput.getGradeType());
-        }
-        if (updateAcademicExamSettingInput.getTotal() != null) {
-            academicExamSetting.setTotal(updateAcademicExamSettingInput.getTotal());
-        }
-        if (updateAcademicExamSettingInput.getPassing() != null) {
-            academicExamSetting.setPassing(updateAcademicExamSettingInput.getPassing());
-        }
-        if (updateAcademicExamSettingInput.getActions() != null) {
-            academicExamSetting.setActions(updateAcademicExamSettingInput.getActions());
-        }
+
         if (updateAcademicExamSettingInput.getDepartmentId() != null) {
             academicExamSetting.setDepartmentId(updateAcademicExamSettingInput.getDepartmentId());
         }
@@ -157,18 +136,14 @@ public class Mutation implements GraphQLMutationResolver {
         if (updateAcademicExamSettingInput.getBranchId() != null) {
             academicExamSetting.setBranchId(updateAcademicExamSettingInput.getBranchId());
         }
-        if (updateAcademicExamSettingInput.getTypeOfGradingId() != null) {
-            final TypeOfGrading typeOfGrading = typeOfGradingRepository.findById(updateAcademicExamSettingInput.getTypeOfGradingId()).get();
-            academicExamSetting.setTypeOfGrading(typeOfGrading);
-        }
 
 //        if (updateAcademicExamSettingInput.getCountvalue() != null) {
 //            academicExamSetting.setCountvalue(updateAcademicExamSettingInput.getCountvalue());
 //        }
 
-        academicExamSetting = this.academicExamSettingRepository.save(academicExamSetting);
-        vo = CommonUtil.createCopyProperties(academicExamSetting, CmsAcademicExamSettingVo.class);
-        vo.setStrexamDate(academicExamSetting.getExamDate() != null ? DateFormatUtil.changeLocalDateFormat(academicExamSetting.getExamDate(), CmsConstants.DATE_FORMAT_dd_MM_yyyy) : "");
+         this.academicExamSettingRepository.save(academicExamSetting);
+//        vo = CommonUtil.createCopyProperties(academicExamSetting, CmsAcademicExamSettingVo.class);
+//        vo.setStrexamDate(academicExamSetting.getExamDate() != null ? DateFormatUtil.changeLocalDateFormat(academicExamSetting.getExamDate(), CmsConstants.DATE_FORMAT_dd_MM_yyyy) : "");
         return new UpdateAcademicExamSettingPayload(vo);
     }
 
