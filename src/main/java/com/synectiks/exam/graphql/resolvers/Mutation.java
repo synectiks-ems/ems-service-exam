@@ -115,7 +115,7 @@ public class Mutation implements GraphQLMutationResolver {
 
         LocalDate exmDt =  DateFormatUtil.convertLocalDateFromUtilDate(updateAcademicExamSettingInput.getExamDate());
         if (updateAcademicExamSettingInput.getExamDate() != null) {
-            academicExamSetting.setExamDate(DateFormatUtil.convertLocalDateFromUtilDate(updateAcademicExamSettingInput.getExamDate()));
+            academicExamSetting.setExamDate(exmDt);
         }
 
         if (updateAcademicExamSettingInput.getDepartmentId() != null) {
