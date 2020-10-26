@@ -106,6 +106,7 @@ public class Mutation implements GraphQLMutationResolver {
         CmsAcademicExamSettingVo vo = CommonUtil.createCopyProperties(updateAcademicExamSettingInput, CmsAcademicExamSettingVo.class);
         AcademicExamSetting academicExamSetting = null;
         academicExamSetting = CommonUtil.createCopyProperties(updateAcademicExamSettingInput, AcademicExamSetting.class);
+        academicExamSetting.setExamDate(DateFormatUtil.convertLocalDateFromUtilDate(updateAcademicExamSettingInput.getExamDate()));
         if("GRADE".equalsIgnoreCase(updateAcademicExamSettingInput.getGradeType().toString())) {
             Optional<TypeOfGrading> otg = typeOfGradingRepository.findById((updateAcademicExamSettingInput.getTypeOfGradingId()));
             if(otg.isPresent()) {
@@ -114,7 +115,7 @@ public class Mutation implements GraphQLMutationResolver {
         }
 
         LocalDate exmDt =  DateFormatUtil.convertLocalDateFromUtilDate(updateAcademicExamSettingInput.getExamDate());
-        if (updateAcademicExamSettingInput.getExamDate() != null) {
+        if(updateAcademicExamSettingInput.getExamDate() != null) {
             vo.setStrexamDate(DateFormatUtil.changeLocalDateFormat(academicExamSetting.getExamDate(), CmsConstants.DATE_FORMAT_dd_MM_yyyy));
             vo.setExamDate(null);
         }
